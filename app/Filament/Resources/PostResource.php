@@ -14,26 +14,34 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Grid;
+ 
+
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 
     public static function form(Form $form): Form
     {
         return $form
+        
             ->schema([
+                Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('text')
+                        ->required()
+                        ->maxLength(255),
+                    
+                        
+     
+                        RichEditor::make('content'),
+                    ])
                 
-                
-                    Forms\Components\TextInput::make('text')
-                    ->required()
-                    ->maxLength(255),
-                Textarea::make('content')
-                    ->rows(10)
-                    ->cols(20)
-           
+                   
                 
             ]);
     }
