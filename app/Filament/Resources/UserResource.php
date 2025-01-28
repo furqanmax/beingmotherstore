@@ -30,6 +30,35 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                // Forms\Components\TextInput::make('name')
+                //     ->required()
+                //     ->maxLength(255),
+                // Forms\Components\TextInput::make('email')
+                //     ->email()
+                //     ->required()
+                //     ->maxLength(255),
+                // Forms\Components\DateTimePicker::make('email_verified_at')
+                //     ->label('Email Verified At')
+                //     ->format('Y-m-d H:i:s') // Display and save the date in the desired format
+                //     ->required(),
+                // Forms\Components\TextInput::make('password')
+                //     ->password()
+                //     ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                //     ->dehydrated(fn (?string $state): bool => filled($state))
+                //     ->maxLength(255)
+                //     ->required(fn (string $operation): bool => $operation === 'create'),
+                // Select::make('roles')
+                //     ->multiple()
+                //     ->relationship('roles','name')
+                //     ->searchable()
+                //     ->preload(),
+                // Select::make('permissions')
+                //     ->multiple()
+                //     ->relationship('permissions','name')
+                //     ->searchable()
+                //     ->preload()
+
+
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -47,6 +76,21 @@ class UserResource extends Resource
                     ->dehydrated(fn (?string $state): bool => filled($state))
                     ->maxLength(255)
                     ->required(fn (string $operation): bool => $operation === 'create'),
+                Forms\Components\TextInput::make('mobile')
+                    ->required()
+                    ->tel()
+                    ->maxLength(10),
+                Forms\Components\DateTimePicker::make('rdate')
+                    ->label('rdate')
+                    ->format('Y-m-d H:i:s') // Display and save the date in the desired format
+                    ->required(),
+                    Forms\Components\TextInput::make('ccode')
+                    ->required(),
+                    Forms\Components\TextInput::make('code')
+                    ->required(),
+                    Forms\Components\TextInput::make('wallet')
+                    ->required()
+                    ->maxLength(10),
                 Select::make('roles')
                     ->multiple()
                     ->relationship('roles','name')

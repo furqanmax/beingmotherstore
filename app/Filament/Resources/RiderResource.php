@@ -19,6 +19,7 @@ class RiderResource extends Resource
     protected static ?string $model = Rider::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
+    protected static ?string $navigationGroup = 'Delivery';
 
     public static function form(Form $form): Form
     {

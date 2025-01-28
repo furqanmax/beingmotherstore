@@ -20,6 +20,7 @@ class ManagerResource extends Resource
     protected static ?string $model = Manager::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Admin';
 
     public static function form(Form $form): Form
     {

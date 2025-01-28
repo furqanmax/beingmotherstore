@@ -7,18 +7,49 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\DB;
 
+
+use MatanYadaev\EloquentSpatial\SpatialBuilder;
+use MatanYadaev\EloquentSpatial\Objects\Point;
+use MatanYadaev\EloquentSpatial\Objects\Polygon;
+use MatanYadaev\EloquentSpatial\Traits\HasSpatial;
+
+
 class Zone extends Model
 {
-    use HasFactory;
+    use HasSpatial;
 
     protected $table = 'zones';
 
-    protected $fillable = [
-        'title',
-        'status',
-        'coordinates',
-        'alias',
-    ];
+    protected $fillable = ['title', 'status', 'alias', 'coordinates'];
+
+    protected $spatialFields = ['coordinates'];
+
+    // public function newEloquentBuilder($query): SpatialBuilder
+    // {
+
+    //     dd($query);
+    //     return new SpatialBuilder($query);
+    // }
+
+    // Set coordinates in the correct format
+    public function setCoordinatesAttribute($value)
+    {
+        // dd($value);
+        // If the value is a valid WKT string
+        if (is_string($value)) {
+            $this->attributes['coordinates'] = DB::raw("ST_GeomFromText('{$value}')");
+            // return DB::raw("ST_GeomFromText('{$value}')");
+        } else {
+            throw new \InvalidArgumentException('Invalid coordinates format.');
+        }
+    }
+    
+    // Accessor for coordinates to return in the desired format
+    // public function getCoordinatesAttribute($value)
+    // {
+    //     // Optionally, you can return the geometry as a WKT string
+    //     return DB::selectOne("SELECT AsText(?) AS wkt", [$value])->wkt;
+    // }
 
 
 
@@ -36,8 +67,11 @@ class Zone extends Model
     }
 
 
+
+
     // public function setCoordinatesAttribute($value)
     // {
+    //     dd($value);
     //     if (is_string($value)) {
     //         $this->attributes['coordinates'] = DB::raw("ST_GeomFromText('{$value}')");
     //     } else {

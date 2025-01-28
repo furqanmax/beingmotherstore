@@ -17,7 +17,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+// use App\Filament\Pages\Settings;
+use Filament\Navigation\MenuItem;
+use App\Filament\Resources\SettingResource;
+// use App\Filament\Pages\Settings;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -33,13 +36,23 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
+            ->pages([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
+            ])->userMenuItems([
+                // MenuItem::make()
+                //     ->label('Settings')
+                //     ->url(fn (): string => SettingResource::getUrl())
+                //     ->icon('heroicon-o-cog-6-tooth'),
+                MenuItem::make()
+                    ->label('Settings')
+                    ->url('/admin/settings/1')
+                    ->icon('heroicon-o-cog-6-tooth'),
+
+                    
+                // ...
             ])
             ->middleware([
                 EncryptCookies::class,

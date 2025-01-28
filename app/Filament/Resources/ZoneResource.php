@@ -17,12 +17,18 @@ use Filament\Forms\Set;
 use Filament\Forms\Get;
 // use Filament\Forms\Components\Select;
 use Filament\Resources\Select;
+use Illuminate\Support\Facades\DB;
+use MatanYadaev\EloquentSpatial\Objects\Polygon;
+use MatanYadaev\EloquentSpatial\Objects\LineString;
+use MatanYadaev\EloquentSpatial\Objects\Point;
+use MatanYadaev\EloquentSpatial\Enums\Srid;
 
 class ZoneResource extends Resource
 {
     protected static ?string $model = Zone::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
+    protected static ?string $navigationGroup = 'Delivery';
 
     public static function form(Form $form): Form
     { $coordinate = '';
@@ -69,10 +75,23 @@ class ZoneResource extends Resource
         // Save GeoJSON data
         $set('geojson', json_encode($state));
 
+      
+        // DB::table('zones')->insert([
+        //     'title' => 'Test Zone',
+        //     'status' => 1,
+        //     'coordinates' => DB::raw("ST_GeomFromText('POLYGON((12.455363273620605 41.90746728266806, 12.450309991836548 41.906636872349075, 12.445632219314575 41.90197359839437, 12.447413206100464 41.90027269624499, 12.457906007766724 41.90000118654431, 12.458517551422117 41.90281205461268, 12.457584142684937 41.903107507989986, 12.457734346389769 41.905918239316286, 12.45572805404663 41.90637337450963, 12.455363273620605 41.90746728266806))')"),
+        //     'alias' => 'Vatican Area',
+        // ]);
+        // dd("testing");
+
+
+       
         // Handle GeoJSON FeatureCollection format
         if (isset($state['geojson']['type']) && $state['geojson']['type'] === 'FeatureCollection') {
             $features = $state['geojson']['features'] ?? [];
+            
                 foreach ($features as $feature) {
+                    // dd($feature['geometry']);
                     if ($feature['geometry']['type'] === 'Polygon') {
                         $coordinates = $feature['geometry']['coordinates'][0] ?? [];
                         $wkt = 'POLYGON((' . implode(',', array_map(function ($coord) {
@@ -83,6 +102,7 @@ class ZoneResource extends Resource
                     }
                 }
         }
+        
 
         // Save alias coordinates
         $lat = $state['lat'] ?? null;

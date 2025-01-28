@@ -16,4 +16,14 @@ class EditZone extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // Example: Ensure coordinates are saved as WKT
+        if (isset($data['coordinates'])) {
+            $data['coordinates'] = DB::raw("ST_GeomFromText('{$data['coordinates']}')");
+        }
+
+        return $data;
+    }
 }

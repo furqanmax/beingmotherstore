@@ -15,6 +15,9 @@ class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    protected $table = 'tbl_user';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +27,13 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'mobile',
+        'rdate',
+        'status',
+        'ccode',
+        'code',
+        'wallet',
+        'email_verified_at',
     ];
 
     /**
