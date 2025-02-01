@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MerchantResource\Pages;
 use App\Filament\Resources\MerchantResource\RelationManagers;
-use App\Models\User;
+use App\Models\Merchant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash;
 
 class MerchantResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Merchant::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -50,17 +50,24 @@ class MerchantResource extends Resource
                     ->required()
                     ->tel()
                     ->maxLength(10),
-                Forms\Components\DateTimePicker::make('rdate')
-                    ->label('rdate')
-                    ->format('Y-m-d H:i:s') // Display and save the date in the desired format
+                Forms\Components\Select::make('status')
+                    ->label('Merchant Status')
+                    ->options([
+                        1 => 'Published',
+                        0 => 'Unpublished',
+                    ])
                     ->required(),
-                    Forms\Components\TextInput::make('ccode')
-                    ->required(),
-                    Forms\Components\TextInput::make('code')
-                    ->required(),
-                    Forms\Components\TextInput::make('wallet')
-                    ->required()
-                    ->maxLength(10),
+                // Forms\Components\DateTimePicker::make('rdate')
+                //     ->label('rdate')
+                //     ->format('Y-m-d H:i:s') // Display and save the date in the desired format
+                //     ->required(),
+                //     Forms\Components\TextInput::make('ccode')
+                //     ->required(),
+                //     Forms\Components\TextInput::make('code')
+                //     ->required(),
+                //     Forms\Components\TextInput::make('wallet')
+                //     ->required()
+                //     ->maxLength(10),
                 Select::make('roles')
                     ->multiple()
                     ->relationship('roles','name')

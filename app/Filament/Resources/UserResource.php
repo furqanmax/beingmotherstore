@@ -80,17 +80,17 @@ class UserResource extends Resource
                     ->required()
                     ->tel()
                     ->maxLength(10),
-                Forms\Components\DateTimePicker::make('rdate')
-                    ->label('rdate')
-                    ->format('Y-m-d H:i:s') // Display and save the date in the desired format
-                    ->required(),
-                    Forms\Components\TextInput::make('ccode')
-                    ->required(),
-                    Forms\Components\TextInput::make('code')
-                    ->required(),
-                    Forms\Components\TextInput::make('wallet')
-                    ->required()
-                    ->maxLength(10),
+                // Forms\Components\DateTimePicker::make('rdate')
+                //     ->label('rdate')
+                //     ->format('Y-m-d H:i:s') // Display and save the date in the desired format
+                //     ->required(),
+                //     Forms\Components\TextInput::make('ccode')
+                //     ->required(),
+                //     Forms\Components\TextInput::make('code')
+                //     ->required(),
+                //     Forms\Components\TextInput::make('wallet')
+                //     ->required()
+                //     ->maxLength(10),
                 Select::make('roles')
                     ->multiple()
                     ->relationship('roles','name')

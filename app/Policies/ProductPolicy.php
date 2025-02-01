@@ -4,24 +4,24 @@ namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
 use App\Models\User;
-use App\Models\Post;
+use App\Models\Product;
 
-class PostPolicy
+class ProductPolicy
 {
     /**
      * Determine whether the user can view-any the model.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view-any Post');
+        return $user->hasPermissionTo('view-any Product');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $model): bool
+    public function view(User $user, Product $model): bool
     {
-        return $user->hasPermissionTo('view Post');
+        return $user->hasPermissionTo('view Product');
     }
 
     /**
@@ -29,23 +29,23 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create Post');
+        return $user->hasPermissionTo('create Product');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Post $model): bool
+    public function update(User $user, Product $model): bool
     {
-        return $user->hasPermissionTo('update Post');
+        return $user->hasPermissionTo('update Product');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Post $model): bool
+    public function delete(User $user, Product $model): bool
     {
-        return $user->hasPermissionTo('delete Post');
+        return $user->hasPermissionTo('delete Product');
     }
 
     /**
@@ -53,15 +53,15 @@ class PostPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('delete-any Post');
+        return $user->hasPermissionTo('delete-any Product');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Post $model): bool
+    public function restore(User $user, Product $model): bool
     {
-        return $user->hasPermissionTo('restore Post');
+        return $user->hasPermissionTo('restore Product');
     }
 
     /**
@@ -69,7 +69,7 @@ class PostPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->hasPermissionTo('restore-any Post');
+        return $user->hasPermissionTo('restore-any Product');
     }
 
     /**
@@ -77,7 +77,7 @@ class PostPolicy
      */
     public function replicate(User $user): bool
     {
-        return $user->hasPermissionTo('replicate Post');
+        return $user->hasPermissionTo('replicate Product');
     }
 
     /**
@@ -85,7 +85,7 @@ class PostPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->hasPermissionTo('reorder Post');
+        return $user->hasPermissionTo('reorder Product');
     }
 
     /**
@@ -93,7 +93,7 @@ class PostPolicy
      */
     public function forceDelete(User $user): bool
     {
-        return $user->hasPermissionTo('force-delete Post');
+        return $user->hasPermissionTo('force-delete Product');
     }
 
     /**
@@ -101,7 +101,7 @@ class PostPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('force-delete-any Post');
+        return $user->hasPermissionTo('force-delete-any Product');
     }
 
 }

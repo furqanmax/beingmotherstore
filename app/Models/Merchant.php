@@ -5,9 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+
 class Merchant extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $table = 'tbl_user'; // Specify the actual table name
 
@@ -23,11 +33,11 @@ class Merchant extends Model
         'email',
         'password',
         'mobile',
-        'rdate',
+        // 'rdate',
         'status',
-        'ccode',
-        'code',
-        'wallet',
+        // 'ccode',
+        // 'code',
+        // 'wallet',
         'email_verified_at',
     ];
 

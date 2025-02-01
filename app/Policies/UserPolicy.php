@@ -3,21 +3,17 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-
+// use App\Models\User;
 use App\Models\User;
 
 class UserPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view-any the model.
      */
     public function viewAny(User $user): bool
     {
-        // return true;
-        if ($user->hasPermissionTo('View User')){
-            return true;
-        }
-        return false;
+        return $user->hasPermissionTo('view-any User');
     }
 
     /**
@@ -25,55 +21,39 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        // return true;
-        if ($user->hasPermissionTo('View User')){
-            return true;
-        }
-        return false;
+        return $user->hasPermissionTo('view User');
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create the model.
      */
     public function create(User $user): bool
     {
-        // return true;
-        if ($user->hasPermissionTo('Create User')){
-            return true;
-        }
-        return false;
+        return $user->hasPermissionTo('create User');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(User $user, User $model): bool
     {
-        // return true;
-        if ($user->hasPermissionTo('Edit User')){
-            return true;
-        }
-        return false;
+        return $user->hasPermissionTo('update User');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, User $model): bool
     {
-        // return true;
-        if ($user->hasPermissionTo('Delete User')){
-            return true;
-        }
-        return false;
+        return $user->hasPermissionTo('delete User');
     }
 
     /**
-     * Determine whether the user can delete any models.
+     * Determine whether the user can delete-any the model.
      */
     public function deleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('delete-any User');
+        return $user->hasPermissionTo('delete-any User');
     }
 
     /**
@@ -81,46 +61,47 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $user->checkPermissionTo('restore User');
+        return $user->hasPermissionTo('restore User');
     }
 
     /**
-     * Determine whether the user can restore any models.
+     * Determine whether the user can restore-any the model.
      */
     public function restoreAny(User $user): bool
     {
-        return $user->checkPermissionTo('restore-any User');
+        return $user->hasPermissionTo('restore-any User');
     }
 
     /**
      * Determine whether the user can replicate the model.
      */
-    public function replicate(User $user, User $model): bool
+    public function replicate(User $user): bool
     {
-        return $user->checkPermissionTo('replicate User');
+        return $user->hasPermissionTo('replicate User');
     }
 
     /**
-     * Determine whether the user can reorder the models.
+     * Determine whether the user can reorder the model.
      */
     public function reorder(User $user): bool
     {
-        return $user->checkPermissionTo('reorder User');
+        return $user->hasPermissionTo('reorder User');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can force-delete the model.
      */
-    public function forceDelete(User $user, User $model): bool
+    public function forceDelete(User $user): bool
     {
-        return $user->checkPermissionTo('force-delete User');
+        return $user->hasPermissionTo('force-delete User');
     }
 
     /**
-     * Determine whether the user can permanently delete any models.
+     * Determine whether the user can force-delete-any the model.
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->checkPermissionTo('force-delete-any User');
+        return $user->hasPermissionTo('force-delete-any User');
     }
+
 }

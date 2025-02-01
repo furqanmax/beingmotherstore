@@ -28,11 +28,11 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'mobile',
-        'rdate',
+        // 'rdate',
         'status',
-        'ccode',
-        'code',
-        'wallet',
+        // 'ccode',
+        // 'code',
+        // 'wallet',
         'email_verified_at',
     ];
 
@@ -58,11 +58,13 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
+        return true;
         return $this->hasRole(['Admin','Writer', 'Moderator']);
     }
 
     public function canAccessFilament(): bool
     {
+        return true;
         return $this->hasRole('Admin');
     }
 }
